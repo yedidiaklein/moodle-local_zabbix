@@ -73,7 +73,7 @@ switch ($firstParam) {
 
 function local_zabix_get_online_users($time_limit) {
     global $DB;
-    $sql = "SELECT COUNT(DISTINCT userid) FROM {logstore_standard_log} WHERE timecreated > :timecreated";
+    $sql = "SELECT COUNT(DISTINCT userid) FROM {logstore_standard_log} WHERE origin='web' AND timecreated > :timecreated";
     $params = ['timecreated' => $time_limit];
     return $DB->count_records_sql($sql, $params);
 }
