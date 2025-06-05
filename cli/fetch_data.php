@@ -46,16 +46,16 @@ switch ($firstParam) {
                 echo $DB->count_records_sql($sql, $params);
 		break;
 	case 'online_users_30' :
-		echo get_online_users(time() - 1800);
+		echo local_zabbix_get_online_users(time() - 1800);
 		break;
         case 'online_users_10' :
-                echo get_online_users(time() - 600);
+                echo local_zabbix_get_online_users(time() - 600);
                 break;
         case 'online_users_5' :
-                echo get_online_users(time() - 300);
+                echo local_zabbix_get_online_users(time() - 300);
                 break;
         case 'online_users_1' :
-                echo get_online_users(time() - 60);
+                echo local_zabbix_get_online_users(time() - 60);
 		break;
 	case 'adhoc_tasks' : 
 		echo $DB->count_records('task_adhoc', []);
@@ -71,7 +71,7 @@ switch ($firstParam) {
 }
 
 
-function get_online_users($time_limit) {
+function local_zabix_get_online_users($time_limit) {
     global $DB;
     $sql = "SELECT COUNT(DISTINCT userid) FROM {logstore_standard_log} WHERE timecreated > :timecreated";
     $params = ['timecreated' => $time_limit];
